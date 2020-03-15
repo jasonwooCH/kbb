@@ -73,8 +73,11 @@ def fetch_style_urls_for_model(make, model, year):
 
     if model_styles_res.history:
         redirected_url = model_styles_res.url
-        url_to_return = redirected_url.replace("options/", "")
-        return [url_to_return]
+
+        if "options/" in redirected_url:
+            url_to_return = redirected_url.replace("options/", "")
+            return [url_to_return]
+        return []
 
     return scrape_style_url_from_model_url(model_styles_res.text)
 
